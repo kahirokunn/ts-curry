@@ -18,16 +18,18 @@ type Fns<T extends AnyFn> = T extends (
   : never;
 export type Curry<T extends AnyFn> = ArgNum<T> extends 1 ? T : Fns<T>;
 
+type Unsupport = never;
+
 type Args<T extends AnyFn> = T extends (...args: infer U) => any ? U : never;
 export function curry<T extends AnyFn>(
   fn: T,
-): Curryable<T> extends true ? Curry<T> : never {
-  let args: any[] = [];
-
-  const curried = (...t: any[]) => {
-    args = args.concat(t);
-
-    return args.length >= fn.length ? fn(args) : curried;
+  context: any = null,
+): Curryable<T> extends true ? Curry<T> : Unsupport {
+  const curried: any = function (this: any, ...t: any[]) {
+    if (t.length >= fn.length) {
+      return context ? fn.call(context, ...t) : fn(...t);
+    }
+    return curried.bind(null, ...t);
   };
-  return curried as any;
+  return curried;
 }
