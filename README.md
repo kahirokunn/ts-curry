@@ -15,7 +15,7 @@ $ yarn add @kahirokunn/ts-curry
 ## Spec
 
 ```typescript
-import { curry } from '../src';
+import { curry } from '@kahirokunn/ts-curry';
 
 test('curryable', () => {
   function curryable(
