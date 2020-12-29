@@ -1,6 +1,6 @@
 {
   "name": "@kahirokunn/ts-curry",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "type safe curry.",
   "keywords": [
     "typescript",
@@ -22,8 +22,7 @@
   "types": "lib/index.d.js",
   "files": [
     "lib",
-    "esm",
-    "umd"
+    "esm"
   ],
   "scripts": {
     "build": "npm run cleanup && npm run build:cjs && npm run build:esm",
